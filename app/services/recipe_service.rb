@@ -13,4 +13,3 @@ class RecipeService
     Faraday.new(url: "https://api.edamam.com") 
   end
 end
-# https://api.edamam.com/api/recipes/v2?type=public&q=Thailand&app_id=f963c704&app_key=83333df30fcea0a80f6eba059cf38612
