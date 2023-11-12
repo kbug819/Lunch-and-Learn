@@ -22,3 +22,5 @@ describe "user_login API" do
       expect(created_user.email).to eq(new_user[:email])
       expect(created_user.api_key).to be_present
     end
+  end
+end
