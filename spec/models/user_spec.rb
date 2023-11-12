@@ -9,4 +9,8 @@ RSpec.describe User, type: :model do
       expect(user).to validate_uniqueness_of(:email)
     end
   end
+
+  describe 'relationships' do
+    it {should have_many :favorites}
+  end
 end
