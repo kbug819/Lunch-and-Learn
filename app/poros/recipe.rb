@@ -3,7 +3,7 @@ class Recipe
   def initialize(recipe_data, country)
     @id = nil
     @title = recipe_data[:recipe][:label]
-    @url = recipe_data[:recipe][:uri]
+    @url = recipe_data[:recipe][:url]
     @country = country
     @image_url = recipe_data[:recipe][:image]
   end
