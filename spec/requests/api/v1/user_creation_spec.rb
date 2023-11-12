@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "user API" do
+describe "user_creation API" do
   describe "post sends information to create a user" do
     it "returns a list of recipes associated with a searched country" do
       new_user = {
@@ -15,7 +15,6 @@ describe "user API" do
 
 
       created_user = User.last
-      expect(response).to have_http_status(201)
       expect(response).to have_http_status(201)
       expect(response).to be_successful
       expect(created_user.name).to eq(new_user[:name])
