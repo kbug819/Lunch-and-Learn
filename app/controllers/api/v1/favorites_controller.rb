@@ -1,4 +1,15 @@
 class Api::V1::FavoritesController < ApplicationController
+  def index
+    user = User.find_by(api_key: params[:api_key])
+    if user 
+      favorites = user.favorites
+      render json: FavoriteSerializer.new(favorites), status: :created
+    else
+      error = ErrorLogin.new("Bad credentials, please try again", 'Bad Credentials', 404)
+      render json: ErrorSerializer.new(error), status: 404
+    end
+  end
+  
   def create
     user = User.find_by(api_key: params[:api_key])
     if user
