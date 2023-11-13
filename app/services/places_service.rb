@@ -1,7 +1,7 @@
 class PlacesService
   
   def tourist_sights(long, lat)
-    get_url("/v2/places?apiKey=#{Rails.application.credentials.geoapify.api_key}&categories=tourism.sights&filter=circle:#{long},#{lat},1000")
+    get_url("/v2/places?apiKey=#{Rails.application.credentials.geoapify.api_key}&categories=tourism.sights&filter=circle:#{long},#{lat},1000")[:features]
   end
   
   def test_connection
