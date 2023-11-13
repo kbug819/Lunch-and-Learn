@@ -22,8 +22,35 @@ describe "recipes API" do
     end
     
     describe "random_search for country if no country is passed in" do
-      xit "returns a random country if no search term is entered" do
+      it "returns a random country if no search term is entered" do
         search_term = ""
+        VCR.use_cassette("recipe_search_#{search_term}", record: :all) do
+  
+          get "/api/v1/recipes?country=#{search_term}"
+          recipes = JSON.parse(response.body, symbolize_names: true)
+          if recipes[:data] == []
+            expect(response).to be_successful
+            expect(response.status).to eq 200
+            expect(recipes).to eq({:data=>[]})
+            expect(recipes[:data][0]).to eq(nil)
+
+          else
+            expect(response).to be_successful
+            expect(recipes[:data]).to be_an Array
+            expect(recipes[:data][0]).to be_a Hash
+            expect(recipes[:data][0][:id]).to eq(nil)
+            expect(recipes[:data][0][:type]).to eq("recipe")
+            expect(recipes[:data][0][:attributes][:title]).to be_a String
+            expect(recipes[:data][0][:attributes][:country]).to be_a String
+            expect(recipes[:data][0][:attributes][:url]).to be_a String
+          end
+        end
+      end
+    end
+
+    describe "random_search for country if 'random' is passed in'" do
+      it "returns a random country if no search term is entered" do
+        search_term = "random"
         VCR.use_cassette("recipe_search_#{search_term}", record: :all) do
   
           get "/api/v1/recipes?country=#{search_term}"
