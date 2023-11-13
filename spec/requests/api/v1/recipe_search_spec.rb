@@ -30,7 +30,7 @@ describe "recipes API" do
     end
     
     describe "random_search for country if no country is passed in" do
-      xit "returns a random country if no search term is entered" do
+      it "returns a random country if no search term is entered" do
         search_term = ""
         VCR.use_cassette("recipe_search_#{search_term}", record: :all) do
   
