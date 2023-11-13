@@ -4,7 +4,7 @@ require 'rails_helper'
 describe RecipeService do
   it 'returns an array of all countries' do
     search_term = "Thailand"
-    VCR.use_cassette("recipe_search_#{search_term}") do
+    VCR.use_cassette("recipe_service_#{search_term}") do
       recipe_search = RecipeService.new.recipe_search(search_term)
       expect(recipe_search).to be_an Array
       expect(recipe_search[0][:recipe]).to be_a Hash
