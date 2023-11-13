@@ -13,7 +13,13 @@ describe Country do
                   "common": "Turks and Caicos Islands"
               }
           }
-      }
+      },
+      "capitalInfo": {
+        "latlng": [
+            48.87,
+            2.33
+        ]
+    },
     }
     country = Country.new(attributes)
 
