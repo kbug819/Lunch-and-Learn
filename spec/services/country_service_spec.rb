@@ -16,4 +16,18 @@ describe CountryService do
       expect(country_list.last[:name][:official]).to eq("Republic of Nicaragua")
     end
   end
+
+  it 'returns a specific country based on a search' do
+    search_term = "France"
+    VCR.use_cassette("country_#{search_term}") do
+      country = CountryService.new.by_search(search_term)
+      expect(country).to be_a Hash
+      expect(country[:name]).to be_a Hash
+      expect(country[:name][:official]).to be_a String
+      expect(country[:name][:official]).to eq("French Republic")
+      expect(country[:capital][0]).to eq("Paris")
+      expect(country[:capitalInfo]).to be_a Hash
+      expect(country[:capitalInfo][:latlng]).to eq([48.87, 2.33])
+    end
+  end
 end
