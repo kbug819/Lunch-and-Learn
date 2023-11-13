@@ -22,7 +22,7 @@ describe "learning resources endpoint" do
         expect(learning[:data][:attributes][:images].count).to eq 10
         expect(learning[:data][:attributes][:images][0]).to be_an Hash
         expect(learning[:data][:attributes][:images][0][:alt_tag]).to eq("standing statue and temples landmark during daytime")
-        expect(learning[:data][:attributes][:images][0][:url]).to eq("https://images.unsplash.com/photo-1528181304800-259b08848526?ixid=M3w1MDU1OTR8MHwxfHNlYXJjaHwxfHxUaGFpbGFuZHxlbnwwfHx8fDE2OTk3NDc1MTB8MA&ixlib=rb-4.0.3")
+        expect(learning[:data][:attributes][:images][0][:url]).to eq("https://images.unsplash.com/photo-1528181304800-259b08848526?ixid=M3w1MDU1OTR8MHwxfHNlYXJjaHwxfHxUaGFpbGFuZHxlbnwwfHx8fDE2OTk5MDkxMTd8MA&ixlib=rb-4.0.3")
       end
     end
 
