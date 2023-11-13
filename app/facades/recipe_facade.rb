@@ -4,7 +4,7 @@ class RecipeFacade
   end
 
   def recipe_search(search_data)
-    if search_data.empty?
+    if search_data.empty? || search_data == "random"
       country = CountryFacade.new.random_country.name
       recipes = @service.recipe_search(country).map do |recipe|
         Recipe.new(recipe, country)
