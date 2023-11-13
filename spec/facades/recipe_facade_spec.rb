@@ -9,7 +9,7 @@ describe RecipeFacade do
     end
   end
   
-  xit '#if no country is passed through, will find a random country with country api' do
+  it '#if no country is passed through, will find a random country with country api' do
     VCR.use_cassette('recipe_search_random', record: :all) do
       recipe_list = RecipeFacade.new.recipe_search("")
       if recipe_list == []
