@@ -11,40 +11,20 @@ describe "places API" do
 
         sites = JSON.parse(response.body, symbolize_names: true)
 
-        expect(recipes[:data]).to be_an Array
-        expect(recipes[:data][0]).to be_a Hash
-        expect(recipes[:data][0][:id]).to eq(nil)
-        expect(recipes[:data][0][:type]).to eq("recipe")
-        expect(recipes[:data][0][:attributes][:title]).to eq("Andy Ricker's Naam Cheuam Naam Taan Piip (Palm Sugar Simple Syrup)")
-        expect(recipes[:data][0][:attributes][:country]).to eq("#{search_term}")
-        expect(recipes[:data][0][:attributes][:url]).to eq("http://www.edamam.com/ontologies/edamam.owl#recipe_3a551652abf5a1cef1421660d1b657d9")
-      end
-    end
-    
-    describe "random_search for country if no country is passed in" do
-      it "returns a random country if no search term is entered" do
-        search_term = ""
-        VCR.use_cassette("recipe_search_#{search_term}", record: :all) do
-  
-          get "/api/v1/recipes?country=#{search_term}"
-          recipes = JSON.parse(response.body, symbolize_names: true)
-          if recipes[:data] == []
-            expect(response).to be_successful
-            expect(response.status).to eq 200
-            expect(recipes).to eq({:data=>[]})
-            expect(recipes[:data][0]).to eq(nil)
+        expect(response).to be_successful
+        expect(sites[:data]).to be_an Array
+        expect(sites[:data].count).to eq(20)
+        expect(sites[:data][0]).to be_a Hash
+        expect(sites[:data][0][:id]).to eq(nil)
+        expect(sites[:data][0][:type]).to eq("tourist_site")
+        expect(sites[:data][0][:attributes][:name]).to eq("Palais du Louvre")
+        expect(sites[:data][0][:attributes][:address]).to eq("Louvre Palace, Place du Lieutenant Henri Karcher, 75001 Paris, France")
+        expect(sites[:data][0][:attributes][:place_id]).to eq("513025c70ed2af024059358e28f2356e4840f00101f90159c731000000000092031050616c616973206475204c6f75767265")
 
-          else
-            expect(response).to be_successful
-            expect(recipes[:data]).to be_an Array
-            expect(recipes[:data][0]).to be_a Hash
-            expect(recipes[:data][0][:id]).to eq(nil)
-            expect(recipes[:data][0][:type]).to eq("recipe")
-            expect(recipes[:data][0][:attributes][:title]).to be_a String
-            expect(recipes[:data][0][:attributes][:country]).to be_a String
-            expect(recipes[:data][0][:attributes][:url]).to be_a String
-          end
-        end
+        expect(sites[:data][19][:type]).to eq("tourist_site")
+        expect(sites[:data][19][:attributes][:name]).to eq("Statue équestre de Jeanne D'Arc")
+        expect(sites[:data][19][:attributes][:address]).to eq("Statue équestre de Jeanne D'Arc, Place Saint-Augustin, 75008 Paris, France")
+        expect(sites[:data][19][:attributes][:place_id]).to eq("51c52120d5398e0240599b1b2d8e0e704840f00102f901a7fd05040000000092032053746174756520c3a971756573747265206465204a65616e6e65204427417263")
       end
     end
   end
