@@ -4,7 +4,7 @@ describe "recipes API" do
   describe "search for a recipe based on a country" do
     it "returns a list of recipes associated with a searched country" do
       search_term = "Thailand"
-      VCR.use_cassette("recipe_search_#{search_term}") do
+      VCR.use_cassette("recipe_search_term_#{search_term}") do
 
         get "/api/v1/recipes?country=#{search_term}"
         expect(response).to be_successful
