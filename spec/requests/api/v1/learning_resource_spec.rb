@@ -45,5 +45,21 @@ describe "learning resources endpoint" do
         expect(learning[:data][:attributes][:images]).to eq([])
       end
     end
+
+    it "returns an empty list  in attributes if there are no videos or images" do
+      search_term = "thisisnotacountry"
+      VCR.use_cassette("learning_resources_#{search_term}") do
+
+        get "/api/v1/learning_resources?country=#{search_term}"
+        expect(response).to be_successful
+
+        learning = JSON.parse(response.body, symbolize_names: true)
+        expect(learning[:data][:id]).to eq(nil)
+        expect(learning[:data][:type]).to eq("learning_resource")
+        expect(learning[:data][:attributes][:country]).to eq("thisisnotacountry")
+        expect(learning[:data][:attributes][:video]).to eq(nil)
+        expect(learning[:data][:attributes][:images]).to eq([])
+      end
+    end
   end
 end
