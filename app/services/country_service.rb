@@ -1,5 +1,9 @@
 class CountryService
   
+  def by_search(country)
+    get_url("/v3.1/name/#{country}")[0]
+  end
+
   def get_all
     get_url("/v3.1/all")
   end
