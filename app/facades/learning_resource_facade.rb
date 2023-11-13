@@ -12,7 +12,11 @@ class LearningResourceFacade
 
   def video_search(search_term)
     video = @google_api.video_search(search_term).first
-    Video.new(video)
+    if video == nil
+      
+    else
+      Video.new(video)
+    end
   end
 
   def by_country(country)
