@@ -2,6 +2,7 @@
 require 'rails_helper'
 
 describe PlacesService do
+  
   it 'returns an array of all countries' do
     VCR.use_cassette("places_service_test") do
       test_connection = PlacesService.new.test_connection
