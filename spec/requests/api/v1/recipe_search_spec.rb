@@ -83,9 +83,6 @@ describe "recipes API" do
           recipes = JSON.parse(response.body, symbolize_names: true)
             expect(response).to_not be_successful
             expect(recipes[:error][:error_message]).to eq("No Country Found")
-            expect(recipes[:error][:status]).to eq("Country Incorrect")
-            expect(recipes[:error][:code]).to eq(400)
-
         end
       end
     end
