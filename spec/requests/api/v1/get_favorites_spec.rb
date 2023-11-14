@@ -41,11 +41,9 @@ describe "get_all_favorites API" do
 
       error = JSON.parse(response.body, symbolize_names: true)
 
-      expect(response).to have_http_status(404)
+      expect(response).to have_http_status(400)
       expect(response).to_not be_successful
       expect(error[:error][:error_message]).to eq("Bad credentials, please try again")
-      expect(error[:error][:status]).to eq("Bad Credentials")
-      expect(error[:error][:code]).to eq(404)
     end
 
     it "will return empty data if user has no favorites" do
