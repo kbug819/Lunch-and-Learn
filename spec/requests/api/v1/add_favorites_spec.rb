@@ -17,6 +17,7 @@ describe "add_favorite API" do
       success = JSON.parse(response.body, symbolize_names: true)
       expect(response).to have_http_status(201)
       expect(response).to be_successful
+      expect(success).to eq({success: "Favorite added successfully"})
       expect(success[:success]).to eq("Favorite added successfully")
 
     end
@@ -36,6 +37,7 @@ describe "add_favorite API" do
 
       expect(response).to have_http_status(400)
       expect(response).to_not be_successful
+      expect(error[:error]).to be_a Hash
       expect(error[:error][:error_message]).to eq("Bad credentials, please try again")
     end
   end
