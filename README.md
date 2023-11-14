@@ -83,6 +83,11 @@ API's
   - User can retrieve their favorited recipes
     - Application verifies API key and returns a list of client's favorites in database
 
+<u>DELETE /api/v1/favorites/FAVORITEID?api_key=DEMO KEY</u>
+  - User sends request to delete favorited item
+    - Application checks to verify api key, verifies favorite item is assigned to user
+    - Deletes the favorited record and returns a success message
+
 ## Project Goals
 - Expose an API that aggregates data from multiple external APIs
 - Expose an API that requires an authentication token
