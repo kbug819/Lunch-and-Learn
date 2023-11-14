@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "recipes API" do
   describe "search for a recipe based on a country" do
     it "returns a list of recipes associated with a searched country" do
-      search_term = "Kingdom of Thailand"
+      search_term = "thailand"
       VCR.use_cassette("recipe_search_term_#{search_term}") do
 
         get "/api/v1/recipes?country=#{search_term}"
@@ -14,9 +14,9 @@ describe "recipes API" do
         expect(recipes[:data][0]).to be_a Hash
         expect(recipes[:data][0][:id]).to eq(nil)
         expect(recipes[:data][0][:type]).to eq("recipe")
-        expect(recipes[:data][0][:attributes][:title]).to eq("Som Tam (Thai Papaya Salad)")
+        expect(recipes[:data][0][:attributes][:title]).to eq("Andy Ricker's Naam Cheuam Naam Taan Piip (Palm Sugar Simple Syrup)")
         expect(recipes[:data][0][:attributes][:country]).to eq("#{search_term}")
-        expect(recipes[:data][0][:attributes][:url]).to eq("http://www.foodista.com/recipe/XCMMQ6GN/som-tam-thai-papaya-salad")
+        expect(recipes[:data][0][:attributes][:url]).to eq("https://www.seriouseats.com/recipes/2013/11/andy-rickers-naam-cheuam-naam-taan-piip-palm-sugar-simple-syrup.html")
       end
     end
     
@@ -51,7 +51,7 @@ describe "recipes API" do
       it "returns a random country if no search term is entered" do
         search_term = "random"
         VCR.use_cassette("recipe_search_#{search_term}", record: :all) do
-  
+
           get "/api/v1/recipes?country=#{search_term}"
           recipes = JSON.parse(response.body, symbolize_names: true)
           if recipes[:data] == []
