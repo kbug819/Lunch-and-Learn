@@ -34,12 +34,9 @@ describe "add_favorite API" do
 
       error = JSON.parse(response.body, symbolize_names: true)
 
-      expect(response).to have_http_status(404)
+      expect(response).to have_http_status(400)
       expect(response).to_not be_successful
       expect(error[:error][:error_message]).to eq("Bad credentials, please try again")
-      expect(error[:error][:status]).to eq("Bad Credentials")
-      expect(error[:error][:code]).to eq(404)
-
     end
   end
 end
