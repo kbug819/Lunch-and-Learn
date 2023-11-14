@@ -6,8 +6,8 @@
 - [Testing Dependencies](#testing-dependencies)
 - [Installation Instructions](#installation-instructions)
 - [Application Architecture](#application-architecture)
-- [Summary of Work](#summary-of-work)
-- [EncounterSim Screenshots](#encountersim-screenshots)
+- [Summary of Work & Endpoints](#endpoints)
+- [Project Goals](#project-goals)
 - [Contributors](#contributors)</br>
 
 <h3 align="center">Project Description</h3>
@@ -53,7 +53,7 @@ API's
 - This application uses a service oriented architecture.
     - Application was made to work with a seperate front-end application. The application was build to satisfy wire frames from a Front-end team, but handles all logic and database for the application as a whole.
 
-## Summary of Work / API Endpoints
+## Endpoints
 <u>GET /api/v1/recipes?country=thailand</u>
   - Find recipes from a specific country by aggregating data from two external APIs
     - Utilizing two APIs (REST Country, Edamam), application searches for recipes from a specific country.
