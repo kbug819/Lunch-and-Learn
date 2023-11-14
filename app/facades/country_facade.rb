@@ -19,6 +19,6 @@ class CountryFacade
   end
 
   def country_search(search_country)
-    on_list = all.any? { |country| country.name == search_country  }
+    on_list = all.any? { |country| country.name.downcase == search_country.downcase }
   end
 end
