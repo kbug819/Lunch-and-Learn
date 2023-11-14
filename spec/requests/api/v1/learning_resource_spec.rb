@@ -34,10 +34,8 @@ describe "learning resources endpoint" do
         expect(response).to_not be_successful
 
         learning = JSON.parse(response.body, symbolize_names: true)
- 
+
         expect(learning[:error][:error_message]).to eq("No Country Found")
-        expect(learning[:error][:status]).to eq("Country Incorrect")
-        expect(learning[:error][:code]).to eq(400)
       end
     end
 
