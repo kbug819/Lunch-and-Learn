@@ -62,8 +62,9 @@ API's
 
 <u>GET /api/v1/learning_resources?country=laos</u>
   - Provides an educational video and images of a searched country
-    - Endpoint uses YouTube API to find videos for a specific country using Mr. History YouTube Channel
-    - Performs a general image search for keyword using Unsplash
+    - The application will first verify that the search term is a valid country before performing search.
+    - Endpoint uses YouTube API to find videos for a specific country using Mr. History YouTube Channel.
+    - Performs a general image search for keyword using Unsplash.
 
 <u>POST /api/v1/users</u>
   - Using basic authentication, user can register for an account
