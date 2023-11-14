@@ -12,107 +12,84 @@
 
 <h3 align="center">Project Description</h3>
 <p align="center">
-#
+Lunch and Learn is an back end application to search for cuisines by country, and provide opportunitty to learn more about that country and culture. Users are able to search for recipes by country, favorite recipes and learn more about a specific country.
 </p></br>
 
 ## Project Links
 - GitHub Repositories
-    - [Backend](https://github.com/EncounterSim/EncounterSim-BE)
+    - [Backend](https://github.com/kbug819/Lunch-and-Learn)
 
 ## System Dependencies
-<!-- 
 - Faraday
 - BCrypt
 - Ruby (3.2.2) 
 - Rails (7.1.1)
-- Mailcatcher
-- Kaminari -->
+API's 
+- Edamamm API - Register for an API key [Here](https://developer.edamam.com/edamam-recipe-api)
+- REST Countries API *no API key needed*
+- YouTube API - Register for an API key [Here](https://developers.google.com/youtube/v3/getting-started)
+  - This project uses [Mr. History YouTube Channel](https://www.youtube.com/channel/UCluQ5yInbeAkkeCndNnUhpw)
+- Unsplash API - Register for an API key [Here](https://unsplash.com/developers)
 
 ## Testing Dependencies
-  <!-- - Pry
+  - Pry
   - Rspec
-  - Shoulda-Matchers
   - Simplecov
   - Capybara
   - VCR
   - Webmock
-  - TimeCop -->
+  - Postman
 
 ## Installation Instructions
- <!-- - Fork Repository
- - `git clone <repo_name`
+ - Fork Repository
+ - `git clone <repo_name>`
  - `cd <repo_name>`
  - `bundle install`   
  - `rails db:{drop,create,migrate,seed}`
  - `rails s`
-    - To Utilize Mailcatcher for Testing
-        - `gem install mailcatcher`
-        - In config/environments/development.rb
-        - `$ mailcatcher` - Visit http://localhost:1080 to review received emails -->
+ - Postman also used for live testing
 
 ## Application Architecture
-<!-- - Frontend Service: Frontend codebase responsible for security, rendering user interface, handling user interactions and makes API service calls to the Backend for API data and Simulation logic return.
-- Backend Service: Backend codebase is responsible for connecting directly with the dnd53api.co API and the logic processing for encounter simulations.
-  - <strong>Architecture Reasoning</strong>: Frontend and Backend services can be updated and maintained independently which reduces the risk of affecting the entire system when changes are made on either side. This architecture setup has allowed for easier testing, adaptability and allows both teams to work simultaneously. -->
+- This application uses a service oriented architecture.
+    - Application was made to work with a seperate front-end application. The application was build to satisfy wire frames from a Front-end team, but handles all logic and database for the application as a whole.
 
-## Summary of Work
-<!-- - Create an Account / Login Methods
-  - Standard Login through email and password entry.
-  - Login through Github with authenticaation using Oauth.
-  - Passworldess Login through Emailed Magic Links.
-- List of <strong>Monsters</strong> from D&D 5th Edition with detailed information from dnd53api.co API.
-  - Pagination offers easy viewing of over 300 Monsters.
-  - Information includes: Hit Points, Armor Class, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma with list of attachs and descriptions.
-- Create a D&D Monster Encounter Simulation:
-  1. Choose a Monster for your Party
-  2. Add attributes for up to 5 Characters in your Party. Choices include:
-      - Class
-      - Level
-      - Strength Modifier
-      - Dexterity Modifier
-      - Constitution Modifier
-      - Wisdom Modifier
-      - Charisma Modifier
-      - Intelligence Modifier
-      - 3 spell slots
-      - Hit points
-      - Armor Class
-      - Damage Dice.
-  3. After clicking 'Create Encounter', EncounterSim-BE will run simulation and return a list of results:
-      - Total Wins
-      - Total Losses
-      - Total Rounds
-      - Total Combats Simulated
-      - Win Percentage
-      - Average Damage across all Combats for each Character
-      - Average Hit Rate Across All Combats for each Character
-      - Total Damage Across Simulation for each Character
-      - Average Monster Damage
-      - Average Monster Hit Rate
-  4. Once a user logs in, they will have access to all their past simulations run with EncounterSim for later usage. -->
+## Summary of Work / API Endpoints
+<u>GET /api/v1/recipes?country=thailand</u>
+  - Find recipes from a specific country by aggregating data from two external APIs
+    - Utilizing two APIs (REST Country, Edamam), application searches for recipes from a specific country.
+    - If user does not pass in a country, application will choose a random country and search by that country.
+    - Rest Country API is also used to verify that search keyword is a valid country before performing search.<br>
 
-## EncounterSim Screenshots
-<!-- <div style="display: flex; align-items: center;">
-  <div style="margin-right: 20px;">
-    <p><center>Login Page</center</p>
-    <img src="https://raw.githubusercontent.com/EncounterSim/encounterSim-FE/63356698711b79d5321abd7d7fa8a3eb5d57c572/Screenshot%202023-11-07%20at%206.13.29%20PM.png" alt="Login Page" width="200" />
-  </div>
-  <div>
-    <p><center>Monster Data Page</center></p>
-    <img src="https://raw.githubusercontent.com/EncounterSim/encounterSim-FE/faa1d6ad27eea37a54edb4e3fed27b94383d4464/Screenshot%202023-11-07%20at%206.34.28%20PM.png" alt="Monster Data" width="600" />
-  </div>
-</div>
+<u>GET /api/v1/learning_resources?country=laos</u>
+  - Provides an educational video and images of a searched country
+    - The application will first verify that the search term is a valid country before performing search.
+    - Endpoint uses YouTube API to find videos for a specific country using Mr. History YouTube Channel.
+    - Performs a general image search for keyword using Unsplash.
 
-<div style="display: flex; align-items: center;">
-  <div style="margin-right: 20px;">
-    <p><center>Simulation Creation Page</center></p>
-      <img src="https://raw.githubusercontent.com/EncounterSim/encounterSim-FE/main/Screen%20Shot%202023-11-07%20at%205.20.14%20PM.png" alt="Simulation Creation Page" width="400" />
-  </div>
-  <div>
-    <p><center>Simulation Result Page</center></p>
-    <img src="https://raw.githubusercontent.com/EncounterSim/encounterSim-FE/main/Screen%20Shot%202023-11-07%20at%205.41.38%20PM.png" alt="Simulation Result Page" width="400" />
-  </div>
-</div> -->
+<u>POST /api/v1/users</u>
+  - Using basic authentication, user can register for an account
+    - Application will verify email is unique, passwords match and will create a User.
+    - After User is created, they will receive an API key to utilize, all information is sent back to the front-end application
+
+<u>POST /api/v1/sessions</u>
+  - Using basic authentication, user can log in to their account
+    - Application will verify email and password are accurate and will return the user's assigned API key
+
+<u>POST /api/v1/favorites</u>
+  - User can favorite recipes and save those recipes to their account
+    - Application verifies API key and saves favorite data in database.
+
+<u>GET /api/v1/favorites?api_key=DEMO KEY</u>
+  - User can retrieve their favorited recipes
+    - Application verifies API key and returns a list of client's favorites in database
+
+## Project Goals
+- Expose an API that aggregates data from multiple external APIs
+- Expose an API that requires an authentication token
+- Implement Basic Authentication
+- Expose an API for CRUD functionality
+- Determine completion based on needs of the front-end team
+- Test both API consumption and exposurre, making use of mocking tools (VCR, Webmock)
 
 
 ## Contributors
