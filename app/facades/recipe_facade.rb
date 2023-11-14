@@ -10,8 +10,13 @@ class RecipeFacade
         Recipe.new(recipe, country)
       end
     else
-      recipes = @service.recipe_search(search_data).map do |recipe|
-        Recipe.new(recipe, search_data)
+      is_country = CountryFacade.new.country_search(search_data)
+      if is_country == true
+        recipes = @service.recipe_search(search_data).map do |recipe|
+          Recipe.new(recipe, search_data)
+        end
+      else
+        "No Country Found"
       end
     end
   end
