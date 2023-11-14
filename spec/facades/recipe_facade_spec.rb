@@ -2,10 +2,10 @@
 require 'rails_helper'
 describe RecipeFacade do
   it '#recipe_search - provides an array of all recipes by given country' do
-    VCR.use_cassette('recipe_search_Thailand') do
-      recipe_list = RecipeFacade.new.recipe_search("Thailand")
+    VCR.use_cassette('recipe_search_Iceland') do
+      recipe_list = RecipeFacade.new.recipe_search("Iceland")
       expect(recipe_list[0]).to be_a Recipe
-      expect(recipe_list[0].country).to eq("Thailand")
+      expect(recipe_list[0].country).to eq("Iceland")
     end
   end
   
