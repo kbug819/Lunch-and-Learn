@@ -5,8 +5,8 @@ class Api::V1::SessionsController < ApplicationController
     if user&.authenticate(params[:password])
       render json: UserSerializer.new(user), status: :created
     else
-      error = ErrorLogin.new("Bad credentials, please try again", 'Bad Credentials', 404)
-      render json: ErrorSerializer.new(error), status: 404
+      error = Error.new("Bad credentials, please try again")
+      render json: ErrorSerializer.new(error), status: 400
     end
   end
 
